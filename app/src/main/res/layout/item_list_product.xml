@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8sp"
+    >
+
+    <LinearLayout
+        android:padding="20sp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/custom_item_products"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPictures"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:src="@drawable/ic_all_inclusive" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="83dp"
+            android:layout_marginLeft="17sp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNameProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bánh Quy Bơ"
+                android:textAllCaps="true"
+                android:textColor="#32cd32"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="giá + sl"
+                android:textColor="#32cd32"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="(Tap To Edit)"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_margin="7sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>

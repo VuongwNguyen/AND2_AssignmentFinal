@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="2sp"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:id="@+id/ivAvatars"
+        android:src="@drawable/ic_all_inclusive" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="7sp"
+            android:id="@+id/tvNameAva"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NameAva" />
+    </LinearLayout>
+</LinearLayout>

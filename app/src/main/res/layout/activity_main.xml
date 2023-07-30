@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity"
+    android:background="@mipmap/background_login3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20sp">
+
+        <ImageView
+            android:layout_width="180sp"
+            android:layout_height="80sp"
+            android:layout_gravity="center"
+            android:src="@mipmap/polytechnic" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtPresented"
+                android:textSize="30sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Presented By Qvuong"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="137dp"
+                android:src="@mipmap/qvuong_removebg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20sp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_person"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edittext"
+                    android:id="@+id/edtLUsername"
+                    android:hint="Username"
+                    android:paddingLeft="7sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_key"
+                android:layout_marginTop="17sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Password"
+                    android:id="@+id/edtLPassword"
+                    android:inputType="textPassword"
+                    android:paddingLeft="7sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="40sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnLogin"
+                android:backgroundTint="#80622c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"/>
+            <TextView
+                android:layout_marginTop="20sp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:id="@+id/txtLogForgot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"/>
+            <TextView
+                android:layout_marginTop="20sp"
+                android:layout_width="match_parent"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtLogRegister"
+                android:text="Don't Have An Account? SignUp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

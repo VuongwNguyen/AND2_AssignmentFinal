@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/itQLSP"
+    android:icon="@drawable/ic_approval"
+    android:title="Quản Lí Sản Phẩm "/>
+    <item
+        android:id="@+id/itgioithieu"
+        android:icon="@drawable/ic_all_inclusive"
+        android:title="Giới Thiệu"/>
+    <group android:checkableBehavior="single">
+        <item android:title="Khác">
+            <menu>
+                <item
+                    android:id="@+id/itSetting"
+                    android:title="Cài Đặt "
+                    android:icon="@drawable/ic_settings_suggest"/>
+                <item
+                    android:title="Logout"
+                    android:id="@+id/itLogout"
+                    android:icon="@drawable/ic_logout"/>
+            </menu>
+        </item>
+    </group>
+</menu>
