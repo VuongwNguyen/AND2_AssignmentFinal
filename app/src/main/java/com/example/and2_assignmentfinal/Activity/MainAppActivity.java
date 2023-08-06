@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.and2_assignmentfinal.Dao.ProductDAO;
+import com.example.and2_assignmentfinal.Fragment.InfoFragment;
 import com.example.and2_assignmentfinal.Fragment.ListFragment;
 import com.example.and2_assignmentfinal.Model.Product;
 import com.example.and2_assignmentfinal.R;
@@ -61,6 +63,7 @@ public class MainAppActivity extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mediaPlayer.release();
                 if (item.getItemId() == R.id.itLogout) {
                     startActivity(new Intent(MainAppActivity.this, MainActivity.class));
                     finish();
@@ -70,16 +73,32 @@ public class MainAppActivity extends AppCompatActivity {
                     fragment = new SettingFragment();
                 } else if (item.getItemId() == R.id.itgioithieu) {
                     setTitle("Giới Thiệu");
-
+                    mediaPlayer = MediaPlayer.create(MainAppActivity.this,R.raw.item_track);
+                    fragment = new InfoFragment();
+                    mediaPlayer.start();
                 } else if (item.getItemId() == R.id.itQLSP) {
                     setTitle("Quản Lý Sản Phẩm");
+                    mediaPlayer = MediaPlayer.create(MainAppActivity.this,R.raw.info_track);
                     fragment = new ListFragment(MainAppActivity.this, productDAO, ListPD);
+                    mediaPlayer.start();
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
                 drawerLayout.close();
+
                 return true;
             }
         });
+        mediaPlayer = MediaPlayer.create(this,R.raw.sound_tracks);
+        mediaPlayer.start();
+    }
+    private MediaPlayer mediaPlayer;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
 

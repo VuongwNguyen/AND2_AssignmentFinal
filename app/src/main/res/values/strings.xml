@@ -1,7 +1,11 @@
-<resources>
+<resources >
     <string name="app_name">AND2_AssignmentFinal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open" />
     <string name="close" />
+    <string name="name"><u>Họ Tên</u>: <b><u>Nguyễn Quốc Vương</u></b></string>
+    <string name="major">Chuyên Ngành: Lập Trình Mobile</string>
+    <string name="email">Email: vuongnqps33232@fpt.edu.vn</string>
+    <string name="git">GitHub: @VuongwNguyen</string>
 </resources>
