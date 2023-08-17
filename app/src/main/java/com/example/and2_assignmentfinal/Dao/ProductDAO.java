@@ -78,7 +78,6 @@ public class ProductDAO {
         long check = database.update("Products", values, "ID=?", new String[]{String.valueOf(product.getID())});
         return check != -1;
     }
-
 }
 
 

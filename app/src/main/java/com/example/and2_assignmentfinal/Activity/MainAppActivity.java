@@ -60,7 +60,6 @@ public class MainAppActivity extends AppCompatActivity {
 //      bắt sưk kiện click item menu
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             Fragment fragment;
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mediaPlayer.release();
