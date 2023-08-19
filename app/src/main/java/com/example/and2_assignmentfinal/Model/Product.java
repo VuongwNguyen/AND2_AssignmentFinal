@@ -6,13 +6,23 @@ public class Product {
     private int Price;
     private int Amount;
     private String Avatar;
+    private boolean isPinned;
 
-    public Product(int ID, String name, int price, int amount, String Avatar) {
+    public Product(int ID, String name, int price, int amount, String avatar, boolean isPinned) {
         this.ID = ID;
         Name = name;
         Price = price;
         Amount = amount;
-        this.Avatar = Avatar;
+        Avatar = avatar;
+        this.isPinned = isPinned;
+    }
+
+    public Product(int ID, String name, int price, int amount, String avatar) {
+        this.ID = ID;
+        Name = name;
+        Price = price;
+        Amount = amount;
+        Avatar = avatar;
     }
 
     public Product() {
@@ -54,7 +64,15 @@ public class Product {
         return Avatar;
     }
 
-    public void setAvatar(String Avatar) {
-        this.Avatar = Avatar;
+    public void setAvatar(String avatar) {
+        Avatar = avatar;
+    }
+
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
     }
 }

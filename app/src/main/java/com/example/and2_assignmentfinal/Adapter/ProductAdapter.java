@@ -36,6 +36,7 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements ItemTouchHelperAdapter {
     private List<Product> itemList;
     private Context context;
+    private int pinnedPosition = RecyclerView.NO_POSITION;
 
     private ProductDAO productDAO;
 
@@ -70,6 +71,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
 
         holder.itemView.setTag(itemList.get(position));
+        holder.bind(itemList.get(position));
+
 //        sự kiện bấm delete
 //        holder.ivDelete.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -187,8 +190,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     // ánh xạ
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView textViewTitle, textViewDescription;
-        ImageView ivDelete, ivAvatar;
+        ImageView ivPinned, ivAvatar;
         FloatingActionButton actionButton;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -196,30 +200,53 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             textViewDescription = itemView.findViewById(R.id.txtDescription);
             actionButton = itemView.findViewById(R.id.floatingButton);
             ivAvatar = itemView.findViewById(R.id.ivPictures);
+            ivPinned = itemView.findViewById(R.id.ivPinned);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-
+                    showpopup(view);
                     return true;
                 }
             });
         }
-        private  void showpopup(View view){
-            PopupMenu popupMenu = new PopupMenu(context,view);
+
+        private void showpopup(View view) {
+            PopupMenu popupMenu = new PopupMenu(context, view);
             MenuInflater inflater = popupMenu.getMenuInflater();
             inflater.inflate(R.menu.menu_item_rcv, popupMenu.getMenu());
+
+            Product product = itemList.get(getAdapterPosition());
 
             popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getItemId() == R.id.actionPin){
+                    if (menuItem.getItemId() == R.id.actionPin) {
+                        if (getAdapterPosition() != pinnedPosition) {
+//                            itemList.get(getAdapterPosition()).setPinned(true);
+                            pinnedPosition = getAdapterPosition();
+                            itemList.remove(getAdapterPosition());
+                            itemList.add(0, product);
+                            product.setPinned(!product.isPinned());
+                            notifyDataSetChanged();
+                        }
 
+
+                        notifyDataSetChanged();
                         return true;
                     }
                     return false;
                 }
             });
+            popupMenu.show();
+        }
+
+        public void bind(Product item) {
+            if (item.isPinned()) {
+                ivPinned.setVisibility(View.VISIBLE);
+            } else {
+                ivPinned.setVisibility(View.GONE);
+            }
         }
 
         @Override
