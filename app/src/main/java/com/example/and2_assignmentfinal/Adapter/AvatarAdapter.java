@@ -1,6 +1,7 @@
 package com.example.and2_assignmentfinal.Adapter;
 
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.example.and2_assignmentfinal.Activity.MainActivity;
 import com.example.and2_assignmentfinal.Model.Avatar;
 import com.example.and2_assignmentfinal.R;
 import com.example.and2_assignmentfinal.Validation.FetchImage;

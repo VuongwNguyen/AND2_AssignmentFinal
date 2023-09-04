@@ -57,6 +57,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     // sét dữ liệu
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int position_ = position;
         holder.textViewTitle.setText(itemList.get(position).getName());
         holder.textViewDescription.setText(String.valueOf(itemList.get(position).getPrice() + "VNĐ" + " - " + " SL:" + itemList.get(position).getAmount()));
 // lấy ảnh drawable
@@ -68,57 +69,54 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 Picasso.get().load(itemList.get(position).getAvatar()).into(holder.ivAvatar);
             }
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogUpdate(itemList.get(position_), position_);
+            }
+        });
 
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(context, view);
+                MenuInflater inflater = popupMenu.getMenuInflater();
+                inflater.inflate(R.menu.menu_item_rcv, popupMenu.getMenu());
+
+                Product product = itemList.get(position_);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.actionPin) {
+                            if (position_ != pinnedPosition) {
+//                            itemList.get(getAdapterPosition()).setPinned(true);
+                                pinnedPosition = position_;
+                                itemList.remove(position_);
+                                itemList.add(0, product);
+                                product.setPinned(!product.isPinned());
+                                notifyDataSetChanged();
+                            }
+                            notifyDataSetChanged();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+                return false;
+            }
+        });
 
         holder.itemView.setTag(itemList.get(position));
         holder.bind(itemList.get(position));
-
-//        sự kiện bấm delete
-//        holder.ivDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setTitle("Cảnh Báo");
-//                builder.setMessage("Xác Nhận Xoá Sản Phẩm '" + itemList.get(holder.getAdapterPosition()).getName() + "' ?");
-//                builder.setIcon(R.drawable.ic_warning);
-//                builder.setPositiveButton("Đồng Ý", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        if (productDAO.deleteProducts(itemList.get(holder.getAdapterPosition()).getID())) {
-//                            Toast.makeText(context, "Delete Completed !", Toast.LENGTH_SHORT).show();
-//                            itemList.clear();
-//                            itemList = productDAO.getListPD();
-//                            notifyItemRemoved(holder.getAdapterPosition());
-//                        } else {
-//                            Toast.makeText(context, "Error Deleting !", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                    }
-//                });
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//            }
-//        });
-//    sự kiện edit
-//        holder.ivUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Product productUpadte = itemList.get(holder.getAdapterPosition());
-//                dialogUpdate(productUpadte);
-//            }
-//        });
     }
 
     private void dialogUpdate(Product productUpadate, int i) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_edit_product, null);
-
 //        ánh xạ
         TextInputEditText edtNamePDe = view.findViewById(R.id.edtNamePD);
         TextInputEditText edtPricePDe = view.findViewById(R.id.edtPricePD);
@@ -188,7 +186,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     // ánh xạ
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle, textViewDescription;
         ImageView ivPinned, ivAvatar;
         FloatingActionButton actionButton;
@@ -201,45 +199,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             actionButton = itemView.findViewById(R.id.floatingButton);
             ivAvatar = itemView.findViewById(R.id.ivPictures);
             ivPinned = itemView.findViewById(R.id.ivPinned);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    showpopup(view);
-                    return true;
-                }
-            });
         }
 
-        private void showpopup(View view) {
-            PopupMenu popupMenu = new PopupMenu(context, view);
-            MenuInflater inflater = popupMenu.getMenuInflater();
-            inflater.inflate(R.menu.menu_item_rcv, popupMenu.getMenu());
-
-            Product product = itemList.get(getAdapterPosition());
-
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    if (menuItem.getItemId() == R.id.actionPin) {
-                        if (getAdapterPosition() != pinnedPosition) {
-//                            itemList.get(getAdapterPosition()).setPinned(true);
-                            pinnedPosition = getAdapterPosition();
-                            itemList.remove(getAdapterPosition());
-                            itemList.add(0, product);
-                            product.setPinned(!product.isPinned());
-                            notifyDataSetChanged();
-                        }
-
-
-                        notifyDataSetChanged();
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            popupMenu.show();
-        }
 
         public void bind(Product item) {
             if (item.isPinned()) {
@@ -248,24 +209,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 ivPinned.setVisibility(View.GONE);
             }
         }
-
-        @Override
-        public void onClick(View view) {
-//          Lấy parent của View (RecyclerView)
-            View parentview = (View) view.getParent();
-//           Kiểm tra nếu parent là một RecyclerView
-            if (parentview instanceof RecyclerView) {
-                RecyclerView recyclerView = (RecyclerView) parentview;
-//               Lấy ViewHolder từ RecyclerView
-                RecyclerView.ViewHolder holder = recyclerView.getChildViewHolder(view);
-//              Kiểm tra nếu ViewHolder là một phiên bản của ViewHolder  (ViewHolder được khai báo trong Adapter)
-                if (holder instanceof ViewHolder) {
-                    Product productUpadte = itemList.get(holder.getAdapterPosition());
-                    dialogUpdate(productUpadte, holder.getAdapterPosition());
-                }
-            }
-        }
-
     }
 
 

@@ -63,6 +63,7 @@ public class MainAppActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mediaPlayer.release();
+                fragment = new Fragment();
                 if (item.getItemId() == R.id.itLogout) {
                     startActivity(new Intent(MainAppActivity.this, MainActivity.class));
                     finish();

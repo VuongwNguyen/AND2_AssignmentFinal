@@ -1,13 +1,8 @@
 package com.example.and2_assignmentfinal.Activity;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
@@ -18,15 +13,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+
 import com.example.and2_assignmentfinal.Database.DBHelper;
 import com.example.and2_assignmentfinal.R;
 import com.example.and2_assignmentfinal.Validation.Validate;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    private String rUsername, rPass;
     private TextInputEditText edtLUsername, edtLPassword;
     private String OTP;
     private TextView tvOtp;
@@ -116,6 +120,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.ibOauth).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                BiometricManager biometricManager = BiometricManager.from(MainActivity.this);
+//
+//                switch (biometricManager.canAuthenticate()) {
+//                    case BiometricManager.BIOMETRIC_SUCCESS:
+//                        // Thiết bị hỗ trợ vân tay và người dùng đã đăng ký vân tay.
+//                        break;
+//                    case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+//                        // Thiết bị không hỗ trợ vân tay.
+//                        break;
+//                    case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+//                        // Vân tay không khả dụng tại thời điểm này.
+//                        break;
+//                    case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+//                        // Thiết bị hỗ trợ vân tay nhưng người dùng chưa đăng ký vân tay.
+//                        break;
+//                }
+                BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                        .setTitle("Xác thực bằng vân tay")
+                        .setSubtitle("Vui lòng sử dụng vân tay để xác thực.")
+                        .setNegativeButtonText("Hủy")
+                        .build();
+                BiometricPrompt biometricPrompt = new BiometricPrompt(MainActivity.this, Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+
+                    }
+
+                    @Override
+                    public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        startActivity(new Intent(MainActivity.this, MainAppActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                    }
+                });
+                biometricPrompt.authenticate(promptInfo);
+
+            }
+        });
+
     }
 
     private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -144,10 +196,9 @@ public class MainActivity extends AppCompatActivity {
             if (result.getResultCode() == 1) {
                 Intent intent = result.getData();
                 Bundle bundle = intent.getExtras();
-                rUsername = bundle.getString("RUsername");
-                rPass = bundle.getString("RPasswold");
-                edtLUsername.setText(rUsername);
-                edtLPassword.setText(rPass);
+
+                edtLUsername.setText(bundle.getString("RUsername"));
+                edtLPassword.setText(bundle.getString("RPasswold"));
             }
         }
     });

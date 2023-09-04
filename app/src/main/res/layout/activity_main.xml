@@ -79,12 +79,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btnLogin"
-                android:backgroundTint="#80622c"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login"/>
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_weight="9"
+                    android:id="@+id/btnLogin"
+                    android:backgroundTint="#80622c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Login"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:id="@+id/ibOauth"
+                    android:src="@drawable/ic_fingerprint"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_marginTop="20sp"
                 android:textAlignment="center"

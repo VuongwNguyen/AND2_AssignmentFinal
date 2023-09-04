@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +14,7 @@
         android:theme="@style/Base.Theme.AND2_AssignmentFinal"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.MainAppActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ResetPasswordActivity"
@@ -22,7 +23,7 @@
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainAppActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
