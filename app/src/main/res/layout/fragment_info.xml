@@ -85,7 +85,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+  Load Ảnh qua Internet\n+  Move Recycler View, Làm gọn item view\n+  Và một số tính năng cơ bản..."
+            android:text="+  Load Ảnh qua Internet\n+  Move Recycler View, Làm gọn item view\n+  Và một số tính năng cơ bản...\n+ Đăng nhập bằng vân tay"
             android:textSize="15sp" />
 
         <LinearLayout

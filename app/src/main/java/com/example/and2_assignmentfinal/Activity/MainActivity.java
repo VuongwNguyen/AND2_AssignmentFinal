@@ -1,11 +1,16 @@
 package com.example.and2_assignmentfinal.Activity;
 
+
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+import androidx.biometric.BiometricPrompt.PromptInfo;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -24,6 +29,7 @@ import com.example.and2_assignmentfinal.Validation.Validate;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private String rUsername, rPass;
@@ -113,6 +119,37 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, MainAppActivity.class));
                     finish();
                 }
+            }
+        });
+
+        findViewById(R.id.ibOauth).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BiometricPrompt.PromptInfo promptInfo =new BiometricPrompt.PromptInfo.Builder()
+                        .setTitle("Xác thực bằng vân tay")
+                        .setSubtitle("Vui lòng sử dụng vân tay để xác thực.")
+                        .setNegativeButtonText("Hủy")
+                        .build();
+                BiometricPrompt  biometricPrompt = new BiometricPrompt(MainActivity.this, Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+
+                    }
+
+                    @Override
+                    public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        startActivity(new Intent(MainActivity.this,MainAppActivity.class));
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                    }
+                });
+                biometricPrompt.authenticate(promptInfo);
+
             }
         });
 
