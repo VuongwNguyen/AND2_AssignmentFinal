@@ -1,5 +1,19 @@
 package com.example.and2_assignmentfinal.Activity;
 
+<<<<<<< HEAD
+=======
+
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+import androidx.biometric.BiometricPrompt.PromptInfo;
+>>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
 
 import android.content.Intent;
 
@@ -123,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ibOauth).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< HEAD
 //                BiometricManager biometricManager = BiometricManager.from(MainActivity.this);
 //
 //                switch (biometricManager.canAuthenticate()) {
@@ -140,11 +155,18 @@ public class MainActivity extends AppCompatActivity {
 //                        break;
 //                }
                 BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+=======
+                BiometricPrompt.PromptInfo promptInfo =new BiometricPrompt.PromptInfo.Builder()
+>>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
                         .setTitle("Xác thực bằng vân tay")
                         .setSubtitle("Vui lòng sử dụng vân tay để xác thực.")
                         .setNegativeButtonText("Hủy")
                         .build();
+<<<<<<< HEAD
                 BiometricPrompt biometricPrompt = new BiometricPrompt(MainActivity.this, Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
+=======
+                BiometricPrompt  biometricPrompt = new BiometricPrompt(MainActivity.this, Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
+>>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
                     @Override
                     public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                         super.onAuthenticationError(errorCode, errString);
@@ -154,8 +176,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
+<<<<<<< HEAD
                         startActivity(new Intent(MainActivity.this, MainAppActivity.class));
                         finish();
+=======
+                        startActivity(new Intent(MainActivity.this,MainAppActivity.class));
+>>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
                     }
 
                     @Override
