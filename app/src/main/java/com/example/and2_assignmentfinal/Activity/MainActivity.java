@@ -1,7 +1,6 @@
 package com.example.and2_assignmentfinal.Activity;
 
-<<<<<<< HEAD
-=======
+
 
 
 import androidx.activity.result.ActivityResult;
@@ -11,9 +10,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.biometric.BiometricPrompt.PromptInfo;
->>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
 
 import android.content.Intent;
 
@@ -137,36 +136,28 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ibOauth).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
-//                BiometricManager biometricManager = BiometricManager.from(MainActivity.this);
-//
-//                switch (biometricManager.canAuthenticate()) {
-//                    case BiometricManager.BIOMETRIC_SUCCESS:
-//                        // Thiết bị hỗ trợ vân tay và người dùng đã đăng ký vân tay.
-//                        break;
-//                    case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
-//                        // Thiết bị không hỗ trợ vân tay.
-//                        break;
-//                    case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
-//                        // Vân tay không khả dụng tại thời điểm này.
-//                        break;
-//                    case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
-//                        // Thiết bị hỗ trợ vân tay nhưng người dùng chưa đăng ký vân tay.
-//                        break;
-//                }
-                BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-=======
+                BiometricManager biometricManager = BiometricManager.from(MainActivity.this);
+
+                switch (biometricManager.canAuthenticate()) {
+                    case BiometricManager.BIOMETRIC_SUCCESS:
+                        // Thiết bị hỗ trợ vân tay và người dùng đã đăng ký vân tay.
+                        break;
+                    case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+                        // Thiết bị không hỗ trợ vân tay.
+                        break;
+                    case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+                        // Vân tay không khả dụng tại thời điểm này.
+                        break;
+                    case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                        // Thiết bị hỗ trợ vân tay nhưng người dùng chưa đăng ký vân tay.
+                        break;
+                }
                 BiometricPrompt.PromptInfo promptInfo =new BiometricPrompt.PromptInfo.Builder()
->>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
                         .setTitle("Xác thực bằng vân tay")
                         .setSubtitle("Vui lòng sử dụng vân tay để xác thực.")
                         .setNegativeButtonText("Hủy")
                         .build();
-<<<<<<< HEAD
-                BiometricPrompt biometricPrompt = new BiometricPrompt(MainActivity.this, Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
-=======
                 BiometricPrompt  biometricPrompt = new BiometricPrompt(MainActivity.this, Executors.newSingleThreadExecutor(), new BiometricPrompt.AuthenticationCallback() {
->>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
                     @Override
                     public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                         super.onAuthenticationError(errorCode, errString);
@@ -176,12 +167,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
-<<<<<<< HEAD
                         startActivity(new Intent(MainActivity.this, MainAppActivity.class));
                         finish();
-=======
                         startActivity(new Intent(MainActivity.this,MainAppActivity.class));
->>>>>>> f7429e8f5b7fc4e9f02072b4df1abc9078d998e0
                     }
 
                     @Override
